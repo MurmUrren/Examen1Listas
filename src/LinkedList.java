@@ -123,14 +123,5 @@ class LinkedList {
         head = null;
     }
 
-    public void display() {
-        Node current = head;
-        while (current != null) {
-            System.out.print(current.getData() + " ");
-            current = current.getNext();
-        }
-        System.out.println();
-    }
-
 
 }
