@@ -81,24 +81,25 @@ class LinkedList {
         return true;
     }
 
-    public void deleteHead() {
+    public boolean deleteHead() {
         if (head == null) {
             System.out.println("La lista esta vacia, no hay nada que eliminar.");
-            return;
+            return false;
         }
 
         head = head.getNext();
+        return true;
     }
 
-    public void deleteOnGivenPosition(int position) {
+    public boolean deleteOnGivenPosition(int position) {
         if (position < 1 || head == null) {
             System.out.println("Posicion invalida o lista vacia");
-            return;
+            return false;
         }
 
         if (position == 1) {
             head = head.getNext();
-            return;
+            return true;
         }
 
         Node current = head;
@@ -111,10 +112,11 @@ class LinkedList {
 
         if (current == null || current.getNext() == null) {
             System.out.println("Posicion invalida.");
-            return;
+            return false;
         }
 
         current.setNext(current.getNext().getNext());
+        return true;
     }
 
     public void clear() {

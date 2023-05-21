@@ -19,48 +19,48 @@ public class Menu {
         controlPanel.setPreferredSize(new Dimension(800, 100));
         controlPanel.setBackground(Color.LIGHT_GRAY);
 
-        JButton buttonInsertTail = new JButton("Insert Tail");
+        JButton buttonInsertTail = new JButton("Insertar Cola");
         buttonInsertTail.addActionListener(e -> {
-            String dataStr = JOptionPane.showInputDialog(frame, "Enter data to insert at tail:");
+            String dataStr = JOptionPane.showInputDialog(frame, "Introduce el valor a insertar en la cola:");
             if (isValidNumber(dataStr)) {
                 int data = Integer.parseInt(dataStr);
                 linkedListGUI.insertTail(data);
             } else {
-                JOptionPane.showMessageDialog(frame, "Invalid data input. Please enter an integer.", "Error",
+                JOptionPane.showMessageDialog(frame, "Dato introducido invalido. Porfavor introduce un entero.", "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
         });
         controlPanel.add(buttonInsertTail);
 
-        JButton buttonInsertHead = new JButton("Insert Head");
+        JButton buttonInsertHead = new JButton("Insertar Cabecera");
         buttonInsertHead.addActionListener(e -> {
-            String dataStr = JOptionPane.showInputDialog(frame, "Enter data to insert at head:");
+            String dataStr = JOptionPane.showInputDialog(frame, "Introduce el valor a insertar en la cabecera:");
             if (isValidNumber(dataStr)) {
                 int data = Integer.parseInt(dataStr);
                 linkedListGUI.insertHead(data);
             } else {
-                JOptionPane.showMessageDialog(frame, "Invalid data input. Please enter an integer.", "Error",
+                JOptionPane.showMessageDialog(frame, "Dato introducido invalido. Porfavor introduce un entero.", "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
         });
         controlPanel.add(buttonInsertHead);
 
-        JButton buttonInsertPosition = new JButton("Insert at Position");
+        JButton buttonInsertPosition = new JButton("Insertar en posicion");
         buttonInsertPosition.addActionListener(e -> {
-            String dataStr = JOptionPane.showInputDialog(frame, "Enter data to insert:");
-            String positionStr = JOptionPane.showInputDialog(frame, "Enter position to insert at:");
+            String dataStr = JOptionPane.showInputDialog(frame, "Introduce el valor a insertar:");
+            String positionStr = JOptionPane.showInputDialog(frame, "Introduce la posicion donde se insertara el valor:");
             if (isValidNumber(dataStr) && isValidNumber(positionStr)) {
                 int data = Integer.parseInt(dataStr);
                 int position = Integer.parseInt(positionStr);
                 linkedListGUI.insertOnGivenPosition(data, position);
             } else {
-                JOptionPane.showMessageDialog(frame, "Invalid data or position input. Please enter integers.", "Error",
+                JOptionPane.showMessageDialog(frame, "Valor o posicion invalido/a. Porfavor introduce enteros.", "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
         });
         controlPanel.add(buttonInsertPosition);
 
-        JButton buttonDeleteTail = new JButton("Delete Tail");
+        JButton buttonDeleteTail = new JButton("Eliminar Tail");
         buttonDeleteTail.addActionListener(e -> {
             if (!linkedListGUI.deleteTail()) {
                 JOptionPane.showMessageDialog(frame, "La lista esta vacia, no hay nada que eliminar.", "Error",
@@ -70,24 +70,36 @@ public class Menu {
         });
         controlPanel.add(buttonDeleteTail);
 
-        JButton buttonDeleteHead = new JButton("Delete Head");
-        buttonDeleteHead.addActionListener(e -> linkedListGUI.deleteHead());
+        JButton buttonDeleteHead = new JButton("Eliminar Head");
+        buttonDeleteHead.addActionListener(e -> {
+            if (!linkedListGUI.deleteHead()) {
+                JOptionPane.showMessageDialog(frame, "La lista esta vacia, no hay nada que eliminar.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
         controlPanel.add(buttonDeleteHead);
 
-        JButton buttonDeletePosition = new JButton("Delete at Position");
+        JButton buttonDeletePosition = new JButton("Eliminar en posicion");
         buttonDeletePosition.addActionListener(e -> {
-            String positionStr = JOptionPane.showInputDialog(frame, "Enter position to delete:");
+
+            String positionStr = JOptionPane.showInputDialog(frame, "Introduce la posicion a eliminar:");
             if (isValidNumber(positionStr)) {
                 int position = Integer.parseInt(positionStr);
-                linkedListGUI.deleteOnGivenPosition(position);
+                if (!linkedListGUI.deleteOnGivenPosition(position)) {
+                    JOptionPane.showMessageDialog(frame, "La lista esta vacia o la posicion es invalida..", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    linkedListGUI.deleteOnGivenPosition(position);
+                }
+                
             } else {
-                JOptionPane.showMessageDialog(frame, "Invalid position input. Please enter an integer.", "Error",
+                JOptionPane.showMessageDialog(frame, "Dato introducido invalido. Porfavor introduce un entero.", "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
         });
         controlPanel.add(buttonDeletePosition);
 
-        JButton buttonClear = new JButton("Clear");
+        JButton buttonClear = new JButton("Limpiar lista");
         buttonClear.addActionListener(e -> linkedListGUI.clear());
         controlPanel.add(buttonClear);
 

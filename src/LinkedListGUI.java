@@ -32,14 +32,17 @@ class LinkedListGUI extends JPanel {
         return delete;
     }
 
-    public void deleteHead() {
-        linkedList.deleteHead();
+    public boolean deleteHead() {
+        delete = linkedList.deleteHead();
         repaint();
+
+        return delete;
     }
 
-    public void deleteOnGivenPosition(int position) {
-        linkedList.deleteOnGivenPosition(position);
+    public boolean deleteOnGivenPosition(int position) {
+        delete = linkedList.deleteOnGivenPosition(position);
         repaint();
+        return delete;
     }
 
     public void clear() {
@@ -62,21 +65,21 @@ class LinkedListGUI extends JPanel {
         int arrowLength = 20;
 
         while (current != null) {
-            // Draw rectangle representing the node
-            g.setColor(Color.YELLOW);
+            // Rectangulo que representa el nodo
+            g.setColor(Color.WHITE);
             g.fillRect(x, y, nodeWidth, nodeHeight);
             g.setColor(Color.BLACK);
             g.drawRect(x, y, nodeWidth, nodeHeight);
             g.drawString(String.valueOf(current.getData()), x + 20, y + 20);
 
-            // Draw arrow
+            // Dibujar flecha si no es el ultimo nodo
             if (current.getNext() != null) {
                 g.drawLine(x + nodeWidth, y + nodeHeight / 2, x + nodeWidth + arrowLength, y + nodeHeight / 2);
                 g.drawLine(x + nodeWidth + arrowLength, y + nodeHeight / 2, x + nodeWidth + arrowLength - 5, y + nodeHeight / 2 - 5);
                 g.drawLine(x + nodeWidth + arrowLength, y + nodeHeight / 2, x + nodeWidth + arrowLength - 5, y + nodeHeight / 2 + 5);
             }
 
-            // Update coordinates for the next node
+            // Coordenadas del siguiente nodo para dibujarla
             x += nodeWidth + arrowLength;
             current = current.getNext();
         }
