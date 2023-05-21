@@ -1,10 +1,6 @@
-import javax.swing.*;
+//import javax.swing.*;
 
 
-public class Main {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(LinkedListGUI::new);
-    }
 
    /*
    Aqui la IDE me marcaba Warnings en Java, diciendo que podia implementar lambdas y si le daba a implementar solito lo hacia
@@ -17,4 +13,3 @@ public class Main {
         });
      */
 
-}

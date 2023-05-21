@@ -1,8 +1,12 @@
 class LinkedList {
-    Node head;
+    private Node head;
 
     public LinkedList() {
         this.head = null;
+    }
+
+    public Node getHead() {
+        return this.head;
     }
 
     public void insertTail(int data) {
@@ -58,15 +62,15 @@ class LinkedList {
         }
     }
 
-    public void deleteTail() {
+    public boolean deleteTail() {
         if (head == null) {
             System.out.println("La lista esta vacia, no hay nada que eliminar.");
-            return;
+            return false;
         }
 
         if (head.getNext() == null) {
             head = null;
-            return;
+            return true;
         }
 
         Node current = head;
@@ -74,6 +78,7 @@ class LinkedList {
             current = current.getNext();
         }
         current.setNext(null);
+        return true;
     }
 
     public void deleteHead() {
@@ -124,4 +129,6 @@ class LinkedList {
         }
         System.out.println();
     }
+
+
 }
