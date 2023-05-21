@@ -1,5 +1,3 @@
-package version1;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,12 +12,12 @@ class Menu {
 
     public void showMenu() {
         System.out.println("=== Linked List Program ===");
-        System.out.println("1. Insert version1.Node on Head");
-        System.out.println("2. Insert version1.Node on Tail");
-        System.out.println("3. Insert version1.Node on Given Position");
-        System.out.println("4. Delete Head version1.Node");
-        System.out.println("5. Delete Tail version1.Node");
-        System.out.println("6. Delete version1.Node on Given Position");
+        System.out.println("1. Insert Node on Head");
+        System.out.println("2. Insert Node on Tail");
+        System.out.println("3. Insert Node on Given Position");
+        System.out.println("4. Delete Head Node");
+        System.out.println("5. Delete Tail Node");
+        System.out.println("6. Delete Node on Given Position");
         System.out.println("7. Display Linked List");
         System.out.println("8. Clear Linked List");
         System.out.println("0. Exit");
@@ -58,7 +56,7 @@ class Menu {
         try {
             data = scanner.nextInt();
             linkedList.insertHead(data);
-            System.out.println("version1.Node inserted at the head.");
+            System.out.println("Node inserted at the head.");
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter an integer.");
             scanner.nextLine(); // Clear the input buffer
@@ -71,7 +69,7 @@ class Menu {
         try {
             data = scanner.nextInt();
             linkedList.insertTail(data);
-            System.out.println("version1.Node inserted at the tail.");
+            System.out.println("Node inserted at the tail.");
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter an integer.");
             scanner.nextLine(); // Clear the input buffer
@@ -86,7 +84,7 @@ class Menu {
             System.out.print("Enter the position to insert the node: ");
             int position = scanner.nextInt();
             linkedList.insertOnGivenPosition(data, position);
-            //System.out.println("version1.Node inserted at position " + position + ".");
+            //System.out.println("Node inserted at position " + position + ".");
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter integers for data and position.");
             scanner.nextLine(); // Clear the input buffer
@@ -107,7 +105,7 @@ class Menu {
         System.out.print("Enter the position of the node to delete: ");
         int position = scanner.nextInt();
         linkedList.deleteOnGivenPosition(position);
-        System.out.println("version1.Node at position " + position + " deleted.");
+        System.out.println("Node at position " + position + " deleted.");
     }
 
     private void displayLinkedList() {

@@ -1,5 +1,3 @@
-package version1;
-
 class Node {
     private final int data;
     private Node next;
