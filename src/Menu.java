@@ -1,109 +1,122 @@
-import javax.swing.*;
-import java.awt.*;
+package version1;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-public class Menu {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(Menu::createAndShowGUI);
+class Menu {
+    private final LinkedList linkedList;
+    private final Scanner scanner;
+
+    public Menu() {
+        this.linkedList = new LinkedList();
+        this.scanner = new Scanner(System.in);
     }
 
-    private static void createAndShowGUI() {
-        JFrame frame = new JFrame();
-        frame.setTitle("Linked List GUI");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(100, 100, 800, 400);
-
-        LinkedListGUI linkedListGUI = new LinkedListGUI();
-
-        JPanel controlPanel = new JPanel();
-        controlPanel.setPreferredSize(new Dimension(800, 100));
-        controlPanel.setBackground(Color.LIGHT_GRAY);
-
-        JButton buttonInsertTail = new JButton("Insert Tail");
-        buttonInsertTail.addActionListener(e -> {
-            String dataStr = JOptionPane.showInputDialog(frame, "Enter data to insert at tail:");
-            if (isValidNumber(dataStr)) {
-                int data = Integer.parseInt(dataStr);
-                linkedListGUI.insertTail(data);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Invalid data input. Please enter an integer.", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        });
-        controlPanel.add(buttonInsertTail);
-
-        JButton buttonInsertHead = new JButton("Insert Head");
-        buttonInsertHead.addActionListener(e -> {
-            String dataStr = JOptionPane.showInputDialog(frame, "Enter data to insert at head:");
-            if (isValidNumber(dataStr)) {
-                int data = Integer.parseInt(dataStr);
-                linkedListGUI.insertHead(data);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Invalid data input. Please enter an integer.", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        });
-        controlPanel.add(buttonInsertHead);
-
-        JButton buttonInsertPosition = new JButton("Insert at Position");
-        buttonInsertPosition.addActionListener(e -> {
-            String dataStr = JOptionPane.showInputDialog(frame, "Enter data to insert:");
-            String positionStr = JOptionPane.showInputDialog(frame, "Enter position to insert at:");
-            if (isValidNumber(dataStr) && isValidNumber(positionStr)) {
-                int data = Integer.parseInt(dataStr);
-                int position = Integer.parseInt(positionStr);
-                linkedListGUI.insertOnGivenPosition(data, position);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Invalid data or position input. Please enter integers.", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        });
-        controlPanel.add(buttonInsertPosition);
-
-        JButton buttonDeleteTail = new JButton("Delete Tail");
-        buttonDeleteTail.addActionListener(e -> {
-            if (!linkedListGUI.deleteTail()) {
-                JOptionPane.showMessageDialog(frame, "La lista esta vacia, no hay nada que eliminar.", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-
-        });
-        controlPanel.add(buttonDeleteTail);
-
-        JButton buttonDeleteHead = new JButton("Delete Head");
-        buttonDeleteHead.addActionListener(e -> linkedListGUI.deleteHead());
-        controlPanel.add(buttonDeleteHead);
-
-        JButton buttonDeletePosition = new JButton("Delete at Position");
-        buttonDeletePosition.addActionListener(e -> {
-            String positionStr = JOptionPane.showInputDialog(frame, "Enter position to delete:");
-            if (isValidNumber(positionStr)) {
-                int position = Integer.parseInt(positionStr);
-                linkedListGUI.deleteOnGivenPosition(position);
-            } else {
-                JOptionPane.showMessageDialog(frame, "Invalid position input. Please enter an integer.", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
-        });
-        controlPanel.add(buttonDeletePosition);
-
-        JButton buttonClear = new JButton("Clear");
-        buttonClear.addActionListener(e -> linkedListGUI.clear());
-        controlPanel.add(buttonClear);
-
-        frame.getContentPane().setLayout(new BorderLayout());
-        frame.getContentPane().add(controlPanel, BorderLayout.NORTH);
-        frame.getContentPane().add(linkedListGUI, BorderLayout.CENTER);
-
-        frame.setVisible(true);
+    public void showMenu() {
+        System.out.println("=== Linked List Program ===");
+        System.out.println("1. Insert version1.Node on Head");
+        System.out.println("2. Insert version1.Node on Tail");
+        System.out.println("3. Insert version1.Node on Given Position");
+        System.out.println("4. Delete Head version1.Node");
+        System.out.println("5. Delete Tail version1.Node");
+        System.out.println("6. Delete version1.Node on Given Position");
+        System.out.println("7. Display Linked List");
+        System.out.println("8. Clear Linked List");
+        System.out.println("0. Exit");
+        System.out.println("==========================");
     }
 
-    private static boolean isValidNumber(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+    public void run() {
+        int option = -1;
+
+        while (option != 0) {
+            showMenu();
+            System.out.print("Enter your choice: ");
+            option = scanner.nextInt();
+
+            switch (option) {
+                case 1 -> insertNodeOnHead();
+                case 2 -> insertNodeOnTail();
+                case 3 -> insertNodeOnGivenPosition();
+                case 4 -> deleteHeadNode();
+                case 5 -> deleteTailNode();
+                case 6 -> deleteNodeOnGivenPosition();
+                case 7 -> displayLinkedList();
+                case 8 -> clearLinkedList();
+                case 0 -> System.out.println("Exiting...");
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+            System.out.println();
         }
+
+        scanner.close();
+    }
+
+    private void insertNodeOnHead() {
+        System.out.print("Enter the data for the new node: ");
+        int data;
+        try {
+            data = scanner.nextInt();
+            linkedList.insertHead(data);
+            System.out.println("version1.Node inserted at the head.");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter an integer.");
+            scanner.nextLine(); // Clear the input buffer
+        }
+    }
+
+    private void insertNodeOnTail() {
+        System.out.print("Enter the data for the new node: ");
+        int data;
+        try {
+            data = scanner.nextInt();
+            linkedList.insertTail(data);
+            System.out.println("version1.Node inserted at the tail.");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter an integer.");
+            scanner.nextLine(); // Clear the input buffer
+        }
+    }
+
+    private void insertNodeOnGivenPosition() {
+        System.out.print("Enter the data for the new node: ");
+        int data;
+        try {
+            data = scanner.nextInt();
+            System.out.print("Enter the position to insert the node: ");
+            int position = scanner.nextInt();
+            linkedList.insertOnGivenPosition(data, position);
+            //System.out.println("version1.Node inserted at position " + position + ".");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter integers for data and position.");
+            scanner.nextLine(); // Clear the input buffer
+        }
+    }
+
+    private void deleteHeadNode() {
+        linkedList.deleteHead();
+        System.out.println("Head node deleted.");
+    }
+
+    private void deleteTailNode() {
+        linkedList.deleteTail();
+        System.out.println("Tail node deleted.");
+    }
+
+    private void deleteNodeOnGivenPosition() {
+        System.out.print("Enter the position of the node to delete: ");
+        int position = scanner.nextInt();
+        linkedList.deleteOnGivenPosition(position);
+        System.out.println("version1.Node at position " + position + " deleted.");
+    }
+
+    private void displayLinkedList() {
+        System.out.print("Linked List: ");
+        linkedList.display();
+    }
+
+    private void clearLinkedList() {
+        linkedList.clear();
+        System.out.println("Linked List cleared.");
     }
 }

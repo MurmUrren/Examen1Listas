@@ -1,3 +1,5 @@
+package version1;
+
 class Node {
     private final int data;
     private Node next;
@@ -6,10 +8,6 @@ class Node {
         this.data = data;
         this.next = null;
     }
-
-    /*public void setData(int data) {
-        this.data = data;
-    }*/
 
     public int getData() {
         return this.data;

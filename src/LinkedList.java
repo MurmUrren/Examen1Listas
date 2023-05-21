@@ -1,12 +1,10 @@
+package version1;
+
 class LinkedList {
     private Node head;
 
     public LinkedList() {
         this.head = null;
-    }
-
-    public Node getHead() {
-        return this.head;
     }
 
     public void insertTail(int data) {
@@ -26,15 +24,17 @@ class LinkedList {
     public void insertHead(int data) {
         Node newNode = new Node(data);
 
-        if (head != null) {
+        if (head == null) {
+            head = newNode;
+        } else {
             newNode.setNext(head);
+            head = newNode;
         }
-        head = newNode;
     }
 
     public void insertOnGivenPosition(int data, int position) {
-        if (position < 1) {
-            System.out.println("Posicion invalida.");
+        if (position < 0) {
+            System.out.println("Invalid position.");
             return;
         }
 
@@ -53,7 +53,7 @@ class LinkedList {
             }
 
             if (current == null) {
-                System.out.println("Posicion invalida.");
+                System.out.println("Invalid position.");
                 return;
             }
 
@@ -62,15 +62,15 @@ class LinkedList {
         }
     }
 
-    public boolean deleteTail() {
+    public void deleteTail() {
         if (head == null) {
-            System.out.println("La lista esta vacia, no hay nada que eliminar.");
-            return false;
+            System.out.println("List is empty. Nothing to delete.");
+            return;
         }
 
         if (head.getNext() == null) {
             head = null;
-            return true;
+            return;
         }
 
         Node current = head;
@@ -78,12 +78,11 @@ class LinkedList {
             current = current.getNext();
         }
         current.setNext(null);
-        return true;
     }
 
     public void deleteHead() {
         if (head == null) {
-            System.out.println("La lista esta vacia, no hay nada que eliminar.");
+            System.out.println("List is empty. Nothing to delete.");
             return;
         }
 
@@ -91,8 +90,8 @@ class LinkedList {
     }
 
     public void deleteOnGivenPosition(int position) {
-        if (position < 1 || head == null) {
-            System.out.println("Posicion invalida o lista vacia");
+        if (position < 0 || head == null) {
+            System.out.println("Invalid position or empty list.");
             return;
         }
 
@@ -110,7 +109,7 @@ class LinkedList {
         }
 
         if (current == null || current.getNext() == null) {
-            System.out.println("Posicion invalida.");
+            System.out.println("Invalid position.");
             return;
         }
 
@@ -124,11 +123,13 @@ class LinkedList {
     public void display() {
         Node current = head;
         while (current != null) {
-            System.out.print(current.getData() + " ");
+            System.out.print(current.getData() + "->");
             current = current.getNext();
+        }
+        if (current == null) {
+            System.out.print("null");
         }
         System.out.println();
     }
-
-
 }
+
