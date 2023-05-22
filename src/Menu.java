@@ -19,7 +19,7 @@ public class Menu {
         controlPanel.setPreferredSize(new Dimension(800, 100));
         controlPanel.setBackground(Color.LIGHT_GRAY);
 
-        JButton buttonInsertTail = new JButton("Insertar Cola");
+        JButton buttonInsertTail = new JButton("Insertar en Cola");
         buttonInsertTail.addActionListener(e -> {
             String dataStr = JOptionPane.showInputDialog(frame, "Introduce el valor a insertar en la cola:");
             if (isValidNumber(dataStr)) {
@@ -32,7 +32,7 @@ public class Menu {
         });
         controlPanel.add(buttonInsertTail);
 
-        JButton buttonInsertHead = new JButton("Insertar Cabecera");
+        JButton buttonInsertHead = new JButton("Insertar en Cabecera");
         buttonInsertHead.addActionListener(e -> {
             String dataStr = JOptionPane.showInputDialog(frame, "Introduce el valor a insertar en la cabecera:");
             if (isValidNumber(dataStr)) {
@@ -60,7 +60,7 @@ public class Menu {
         });
         controlPanel.add(buttonInsertPosition);
 
-        JButton buttonDeleteTail = new JButton("Eliminar Tail");
+        JButton buttonDeleteTail = new JButton("Eliminar en cola");
         buttonDeleteTail.addActionListener(e -> {
             if (!linkedListGUI.deleteTail()) {
                 JOptionPane.showMessageDialog(frame, "La lista esta vacia, no hay nada que eliminar.", "Error",
@@ -70,7 +70,7 @@ public class Menu {
         });
         controlPanel.add(buttonDeleteTail);
 
-        JButton buttonDeleteHead = new JButton("Eliminar Head");
+        JButton buttonDeleteHead = new JButton("Eliminar en cabecera");
         buttonDeleteHead.addActionListener(e -> {
             if (!linkedListGUI.deleteHead()) {
                 JOptionPane.showMessageDialog(frame, "La lista esta vacia, no hay nada que eliminar.", "Error",
@@ -86,10 +86,8 @@ public class Menu {
             if (isValidNumber(positionStr)) {
                 int position = Integer.parseInt(positionStr);
                 if (!linkedListGUI.deleteOnGivenPosition(position)) {
-                    JOptionPane.showMessageDialog(frame, "La lista esta vacia o la posicion es invalida..", "Error",
+                    JOptionPane.showMessageDialog(frame, "La lista esta vacia o la posicion es invalida.", "Error",
                             JOptionPane.ERROR_MESSAGE);
-                } else {
-                    linkedListGUI.deleteOnGivenPosition(position);
                 }
                 
             } else {
@@ -100,7 +98,7 @@ public class Menu {
         controlPanel.add(buttonDeletePosition);
 
         JButton buttonClear = new JButton("Limpiar lista");
-        buttonClear.addActionListener(e -> linkedListGUI.clear());
+        buttonClear.addActionListener(e -> linkedListGUI.clearList());
         controlPanel.add(buttonClear);
 
         frame.getContentPane().setLayout(new BorderLayout());

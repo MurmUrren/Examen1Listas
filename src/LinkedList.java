@@ -119,7 +119,7 @@ class LinkedList {
         return true;
     }
 
-    public void clear() {
+    public void clearList() {
         head = null;
     }
 

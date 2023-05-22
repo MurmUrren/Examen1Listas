@@ -45,8 +45,8 @@ class LinkedListGUI extends JPanel {
         return delete;
     }
 
-    public void clear() {
-        linkedList.clear();
+    public void clearList() {
+        linkedList.clearList();
         repaint();
     }
 
@@ -72,17 +72,18 @@ class LinkedListGUI extends JPanel {
             g.drawRect(x, y, nodeWidth, nodeHeight);
             g.drawString(String.valueOf(current.getData()), x + 20, y + 20);
 
-            // Dibujar flecha si no es el ultimo nodo
-            if (current.getNext() != null) {
-                g.drawLine(x + nodeWidth, y + nodeHeight / 2, x + nodeWidth + arrowLength, y + nodeHeight / 2);
-                g.drawLine(x + nodeWidth + arrowLength, y + nodeHeight / 2, x + nodeWidth + arrowLength - 5, y + nodeHeight / 2 - 5);
-                g.drawLine(x + nodeWidth + arrowLength, y + nodeHeight / 2, x + nodeWidth + arrowLength - 5, y + nodeHeight / 2 + 5);
-            }
+            // Dibujar flechas
+            g.drawLine(x + nodeWidth, y + nodeHeight / 2, x + nodeWidth + arrowLength, y + nodeHeight / 2);
+            g.drawLine(x + nodeWidth + arrowLength, y + nodeHeight / 2, x + nodeWidth + arrowLength - 5, y + nodeHeight / 2 - 5);
+            g.drawLine(x + nodeWidth + arrowLength, y + nodeHeight / 2, x + nodeWidth + arrowLength - 5, y + nodeHeight / 2 + 5);
+
 
             // Coordenadas del siguiente nodo para dibujarla
             x += nodeWidth + arrowLength;
             current = current.getNext();
         }
+
+        g.drawString("NULL", x + 20, y + 20);
     }
 }
 
